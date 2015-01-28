@@ -46,23 +46,19 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\EnemyScript.cs" />
-     <Compile Include="Assets\MultiObjectPoolManager.cs" />
-     <Compile Include="Assets\PlayerController.cs" />
-     <Compile Include="Assets\SmoothMouseLook.cs" />
-     <Compile Include="Assets\backAndForthPlatform.cs" />
-     <Compile Include="Assets\platformScript.cs" />
-     <Compile Include="Assets\quitScript.cs" />
- <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/Jeremy/Documents/GitHub/ThrowBackGame/ThrowBackGame/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
+     <Compile Include="Assets\Extras\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Menu\SinglePlayerScript.cs" />
+     <Compile Include="Assets\Scripts\MultiObjectPoolManager.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\SmoothMouseLook.cs" />
+     <Compile Include="Assets\Scripts\backAndForthPlatform.cs" />
+     <Compile Include="Assets\Scripts\platformScript.cs" />
+     <Compile Include="Assets\Scripts\quitScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{A733E031-83B8-F882-8014-B15146ECB63B}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[AddComponentMenu("Camera-Control/Smooth Mouse Look")]
-public class SmoothMouseLook : MonoBehaviour 
+public class CameraControl : MonoBehaviour 
 {
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
@@ -28,15 +27,43 @@ public class SmoothMouseLook : MonoBehaviour
 	public float frameCounter = 20;
 	
 	Quaternion originalRotation;
-		
-	PlayerController pc;
+	public GameObject light;
+	Vector3 lightEndPos;
+
+	public AudioClip selectClip;
+	float oldZ = 8.9f;
+	SinglePlayerScript spc;
+	bool fade = false;
+	void Start ()
+	{			
+		if (rigidbody)
+			rigidbody.freezeRotation = true;
+		originalRotation = transform.localRotation;
+
+		spc = GameObject.Find("SinglePlayerText").GetComponent<SinglePlayerScript>();
+	}
 
 	void Update ()
 	{
-		if(!pc.paused)
+		lightEndPos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, oldZ));
+		light.transform.position = Vector3.Lerp(light.transform.position, lightEndPos, 12*Time.deltaTime);
+
+		if(spc.startScene && oldZ == 8.9f)
 		{
-			Screen.lockCursor = true;
-			Screen.showCursor = false;
+			oldZ = -15;
+			audio.PlayOneShot(selectClip);
+			fade = true;
+		}
+		if(Input.GetMouseButtonDown(1))
+		{
+			spc.startScene = false;
+			oldZ = 8.9f;
+		}
+		if(fade)
+		{
+			audio.volume = Mathf.Lerp(audio.volume, 0, 2*Time.deltaTime);
+		}
+
 			if (axes == RotationAxes.MouseXAndY)
 			{			
 				rotAverageY = 0f;
@@ -115,22 +142,8 @@ public class SmoothMouseLook : MonoBehaviour
 				Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
 				transform.localRotation = originalRotation * yQuaternion;
 			}
-		}
-		else
-		{
-			Screen.lockCursor = false;
-			Screen.showCursor = true;
-		}
 	}
-	
-	void Start ()
-	{			
-		if (rigidbody)
-			rigidbody.freezeRotation = true;
-		originalRotation = transform.localRotation;
 
-		pc = GameObject.Find("Player").GetComponent<PlayerController>();
-	}
 	
 	public static float ClampAngle (float angle, float min, float max)
 	{

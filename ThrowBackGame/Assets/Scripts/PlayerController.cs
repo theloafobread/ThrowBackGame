@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour {
 	public Camera cam;
 
 	float timer = 0;
-	float rateOfFire = .5f;
+	float rateOfFire = .08f;
+
+	public AudioClip gunShot;
 	void Start () 
 	{
 		
@@ -27,14 +29,14 @@ public class PlayerController : MonoBehaviour {
 		print("In contact with " + c.transform.name);
 		if(c.collider.tag == "Ground" || c.collider.tag == "Cube")
 		{
-			grounded = true;
+			//grounded = true;
 			doubleJumped = false;
 			speed = 10000;
 		}
 		if(c.collider.tag == "Ramp")
 		{
 			print ("RAMP");
-			grounded = true;
+			//grounded = true;
 			doubleJumped = false;
 			speed = 10000;
 		}
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 		if(c.gameObject.tag == "MovingPlatform")
 		{
 			transform.parent = c.transform;
-			grounded = true;
+			//grounded = true;
 			doubleJumped = false;
 			speed = 10000;
 		}
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			speedLimit = 5;
 		}
-
+		//when wall jumping, add a blue light burst and drain energy
 		if(Input.GetKey(KeyCode.W) && grounded)
 			rigidbody.AddForce(transform.forward*speed*Time.deltaTime);
 		if(Input.GetKey(KeyCode.A) && grounded)
@@ -83,6 +85,10 @@ public class PlayerController : MonoBehaviour {
 			rigidbody.AddForce(transform.forward*-speed*Time.deltaTime);
 		if(Input.GetKey(KeyCode.D) && grounded)
 			rigidbody.AddForce(transform.right*speed*Time.deltaTime);
+		if(!Input.anyKey && grounded)
+		{
+			rigidbody.velocity = Vector3.Lerp (rigidbody.velocity, Vector3.zero, 5*Time.deltaTime);
+		}
 
 		if((Input.GetKeyDown(KeyCode.Space) && grounded) || (Input.GetKeyDown(KeyCode.Space) && !grounded && !doubleJumped))
 		{
@@ -99,6 +105,7 @@ public class PlayerController : MonoBehaviour {
 		else
 			cam.transform.localPosition = new Vector3(0, .72f, .27f);
 
+		//clamp the rigidbody velocity based on what button you're pressing, you should only go in the direction you are pressing
 		Vector3 clampVelx = rigidbody.velocity;
 		clampVelx.x = Mathf.Clamp(clampVelx.x, -speedLimit, speedLimit);
 		rigidbody.velocity = clampVelx;
@@ -131,11 +138,11 @@ public class PlayerController : MonoBehaviour {
 			Debug.DrawRay(cam.transform.position, cam.transform.forward * 100f, Color.red); // for detecting what's in front, pointed forward
 			if(timer > rateOfFire)
 			{
+				audio.Play();
 				RaycastHit hit;
 				Debug.DrawRay(cam.transform.position, cam.transform.forward * 100f, Color.green); // for detecting what's in front, pointed forward
 				if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, 100 )) 
 				{
-
 					print("Hit: "+hit.collider.name + " : "+hit.distance);
 					if(hit.collider.tag == "Enemy")
 					{
@@ -153,6 +160,13 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate()
 	{
  		RaycastHit hit;
+		Debug.DrawRay(transform.position, -transform.up * 1.5f, Color.blue); // for detecting what's in front, pointed forward
+		
+		if (Physics.Raycast (transform.position,  -transform.up, out hit, 1.5f )) 
+			grounded = true;
+		else
+			grounded = false;
+
 		Debug.DrawRay(transform.position, transform.forward * 1.2f, Color.blue); // for detecting what's in front, pointed forward
 		
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 1.2f )) 
