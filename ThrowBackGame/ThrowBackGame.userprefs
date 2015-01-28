@@ -1,12 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerController.cs">
     <Files>
-      <File FileName="Assets\PlayerController.cs" Line="83" Column="6" />
-      <File FileName="Assets\SmoothMouseLook.cs" Line="119" Column="29" />
-      <File FileName="Assets\platformScript.cs" Line="16" Column="3" />
-      <File FileName="Assets\backAndForthPlatform.cs" Line="5" Column="2" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" Line="1" Column="1" />
+      <File FileName="Assets\MultiObjectPoolManager.cs" Line="149" Column="5" />
+      <File FileName="Assets\PlayerController.cs" Line="114" Column="21" />
+      <File FileName="Assets\SmoothMouseLook.cs" Line="1" Column="1" />
+      <File FileName="Assets\platformScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\backAndForthPlatform.cs" Line="1" Column="1" />
+      <File FileName="Assets\EnemyScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

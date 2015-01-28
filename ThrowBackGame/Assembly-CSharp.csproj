@@ -46,10 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EnemyScript.cs" />
+     <Compile Include="Assets\MultiObjectPoolManager.cs" />
      <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\SmoothMouseLook.cs" />
      <Compile Include="Assets\backAndForthPlatform.cs" />
      <Compile Include="Assets\platformScript.cs" />
+     <Compile Include="Assets\quitScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

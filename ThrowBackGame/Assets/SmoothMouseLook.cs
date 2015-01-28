@@ -116,8 +116,11 @@ public class SmoothMouseLook : MonoBehaviour
 				transform.localRotation = originalRotation * yQuaternion;
 			}
 		}
-		Screen.lockCursor = false;
-		Screen.showCursor = true;
+		else
+		{
+			Screen.lockCursor = false;
+			Screen.showCursor = true;
+		}
 	}
 	
 	void Start ()

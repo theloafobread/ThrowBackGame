@@ -17,7 +17,6 @@ public class backAndForthPlatform : MonoBehaviour {
 		if(transform.position == endPos)
 		{
 			goLeft = !goLeft;
-			Debug.Log(goLeft.ToString());
 		}
 		if(goLeft)
 			endPos = new Vector3(-13,1, -9);
